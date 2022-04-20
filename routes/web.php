@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
 
-    Route::get('/login', [AdminController::class, 'Login'])->name('login_form');
+    Route::get('/login', [AdminController::class, 'Index'])->name('login_form');
 
-    Route::get('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
+    Route::post('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
 
     Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('isAdmin');
 });
