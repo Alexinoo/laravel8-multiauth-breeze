@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/* Admin Route */
+
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/login', [AdminController::class, 'Login'])->name('login_form');
+
+    Route::get('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
+
+    Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('isAdmin');
+});
+
+
+/* End of Admin Route */
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,4 +38,4 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
