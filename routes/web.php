@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Seller\SellerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/* Admin Route */
-
+/*--------------------- Admin Route ------------------------------------------------ */
 
 Route::prefix('admin')->group(function () {
 
@@ -35,8 +35,47 @@ Route::prefix('admin')->group(function () {
     Route::post('/register/store', [AdminController::class, 'store'])->name('admin.store');
 });
 
+/* ----------------  End of Admin Route  ------------- */
 
-/* End of Admin Route */
+
+
+
+
+
+
+
+/*------------------- Seller Route -------------------*/
+
+Route::prefix('seller')->group(function () {
+
+    Route::get('/login', [SellerController::class, 'index'])->name('seller_login_form');
+
+    Route::post('/login/owner', [SellerController::class, 'Login'])->name('seller.login');
+
+    Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('seller.dashboard')->middleware('isSeller');
+
+    // logout
+    Route::get('/logout', [SellerController::class, 'logout'])->name('seller.logout');
+
+    // register - render
+    Route::get('/register', [SellerController::class, 'register'])->name('seller.register');
+
+    // register - store
+    Route::post('/register/store', [SellerController::class, 'store'])->name('seller.store');
+});
+
+
+
+/*-------------------End of  Seller Route -------------------*/
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/', function () {
