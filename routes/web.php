@@ -26,7 +26,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('isAdmin');
 
     // logout
-    Route::get('/logout', [AdminController::class, 'Logout'])->name('admin.logout');
+    Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+
+    // register - render
+    Route::get('/register', [AdminController::class, 'AdminRegister'])->name('admin.register');
+
+    // register - store
+    Route::post('/register/store', [AdminController::class, 'store'])->name('admin.store');
 });
 
 
