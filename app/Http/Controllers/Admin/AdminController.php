@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -38,7 +41,25 @@ class AdminController extends Controller
         return view('Admin.dashboard');
     }
 
-    public function Logout()
+    public function AdminRegister()
+    {
+        return view('Admin.admin_register');
+    }
+
+    public function store(Request $request)
+    {
+        Admin::insert([
+            'name' => $request->username,
+            'email' =>  $request->email,
+            'password' => Hash::make($request->password),
+            'created_at' => Carbon::now()
+
+        ]);
+
+        return redirect()->route('login_form')->with('error', 'Admin created successfully');
+    }
+
+    public function AdminLogout()
     {
         Auth::guard('admin')->logout();
 
