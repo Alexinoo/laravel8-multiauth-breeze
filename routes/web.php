@@ -24,6 +24,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
 
     Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard')->middleware('isAdmin');
+
+    // logout
+    Route::get('/logout', [AdminController::class, 'Logout'])->name('admin.logout');
 });
 
 
