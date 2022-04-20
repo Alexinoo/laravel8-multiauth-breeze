@@ -66,5 +66,8 @@ class Kernel extends HttpKernel
 
         // Registered AdminMiddleware
         'isAdmin' => \App\Http\Middleware\AdminMiddleware::class,
+
+        // Registered SellerMiddleware
+        'isSeller' => \App\Http\Middleware\SellerMiddleware::class,
     ];
 }
